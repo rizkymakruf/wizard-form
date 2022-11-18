@@ -7,7 +7,11 @@ import Review from "../components/Review";
 const Home = () => {
   const [page, setPage] = useState(0);
 
-  const [formData, setFormData] = useState();
+  const [formData, setFormData] = useState({
+    firstname: "",
+    lastName: "",
+    biodata: "",
+  });
 
   const FormTitles = ["Formulir Klaim", "Form Foto", "Review"];
 
@@ -33,6 +37,8 @@ const Home = () => {
                 ? "border-green-500 bg-green-100"
                 : page === 1
                 ? "border-green-500 bg-green-100"
+                : page === 2
+                ? "border-green-500 bg-green-100"
                 : "border-blue-800  bg-blue-100"
             }`}
           >
@@ -43,7 +49,15 @@ const Home = () => {
                 viewBox="0 0 24 24"
                 strokeWidth="1.5"
                 stroke="currentColor"
-                className="w-5 h-5 text-blue-800"
+                className={`w-5 h-5 ${
+                  page === 0
+                    ? "text-green-600"
+                    : page === 1
+                    ? "text-green-600"
+                    : page === 2
+                    ? "text-green-600"
+                    : "text-blue-800 "
+                }`}
               >
                 <path
                   strokeLinecap="round"
@@ -54,7 +68,15 @@ const Home = () => {
               <p className="text-xs text-gray-500">Formulir Klaim</p>
             </div>
           </div>
-          <div className="w-2/6 bordered border-t-8 border-blue-800 rounded-t-lg flex flex-col justify-center items-center bg-blue-100">
+          <div
+            className={`w-2/6 bordered border-t-8 rounded-t-lg flex flex-col justify-center items-center ${
+              page === 1
+                ? "border-green-500 bg-green-100"
+                : page === 2
+                ? "border-green-500 bg-green-100"
+                : "border-blue-800  bg-blue-100"
+            }`}
+          >
             <div className="flex gap-2 px-2 py-2 w-full justify-center items-center">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -62,7 +84,13 @@ const Home = () => {
                 viewBox="0 0 24 24"
                 strokeWidth="1.5"
                 stroke="currentColor"
-                className="w-5 h-5 text-blue-800"
+                className={`w-5 h-5 ${
+                  page === 1
+                    ? "text-green-600"
+                    : page === 2
+                    ? "text-green-600"
+                    : "text-blue-800 "
+                }`}
               >
                 <path
                   strokeLinecap="round"
@@ -73,7 +101,13 @@ const Home = () => {
               <p className="text-xs text-gray-500">Foto SIM & STNK</p>
             </div>
           </div>
-          <div className="w-2/6 bordered border-t-8 border-blue-800 rounded-t-lg flex flex-col justify-center items-center bg-blue-100">
+          <div
+            className={`w-2/6 bordered border-t-8 rounded-t-lg flex flex-col justify-center items-center ${
+              page === 2
+                ? "border-green-500 bg-green-100"
+                : "border-blue-800  bg-blue-100"
+            }`}
+          >
             <div className="flex gap-2 px-2 py-2 w-full justify-center items-center">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -81,7 +115,9 @@ const Home = () => {
                 viewBox="0 0 24 24"
                 strokeWidth="1.5"
                 stroke="currentColor"
-                className="w-5 h-5 text-blue-800"
+                className={`w-5 h-5 ${
+                  page === 2 ? "text-green-600" : "text-blue-800 "
+                }`}
               >
                 <path
                   strokeLinecap="round"
