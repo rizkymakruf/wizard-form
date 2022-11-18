@@ -8,7 +8,7 @@ const Home = () => {
   const [page, setPage] = useState(0);
 
   const [formData, setFormData] = useState({
-    firstname: "",
+    firstName: "",
     lastName: "",
     biodata: "",
   });
