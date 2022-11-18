@@ -5,16 +5,20 @@ import Navigasi from "../components/navigasi";
 import Review from "../components/Review";
 
 const Home = () => {
+  // set page
   const [page, setPage] = useState(0);
 
+  // set data from form
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
     biodata: "",
   });
 
+  // page title for indexing
   const FormTitles = ["Formulir Klaim", "Form Foto", "Review"];
 
+  // return form selected index
   const PageDisplay = () => {
     if (page === 0) {
       return <FormulirKlaim formData={formData} setFormData={setFormData} />;
