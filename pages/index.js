@@ -1,12 +1,15 @@
-import { useState } from "react";
+import { parse } from "postcss";
+import { useEffect, useState } from "react";
+import { StyleRegistry } from "styled-jsx";
 import FormFoto from "../components/FormFoto";
 import FormulirKlaim from "../components/FormulirKlaim";
 import Navigasi from "../components/navigasi";
 import Review from "../components/Review";
+import axios from "axios";
 
 const Home = (props) => {
   // fetch data provinces
-  const { provinces } = props;
+  const { provinces, regencies } = props;
   // set page
   const [page, setPage] = useState(0);
 
@@ -16,9 +19,20 @@ const Home = (props) => {
     lastName: "",
     biodata: "",
     province: "",
+    regencies: "",
   });
 
-  console.log(formData.province);
+  const [id, setId] = useState();
+  const [link, setLink] = useState("");
+  const proId = formData.province;
+  useEffect(() => {
+    setId(`${proId === "" ? "11" : formData.province}`);
+    setLink(
+      `https://emsifa.github.io/api-wilayah-indonesia/api/regencies/${id}.json`
+    );
+  }, [props]);
+  console.log("link", link);
+  console.log("id", id);
 
   // page title for indexing
   const FormTitles = ["Formulir Klaim", "Form Foto", "Review"];
@@ -31,6 +45,7 @@ const Home = (props) => {
           formData={formData}
           setFormData={setFormData}
           provinces={provinces}
+          regencies={regencies}
         />
       );
     } else if (page === 1) {
@@ -179,19 +194,15 @@ const Home = (props) => {
 export default Home;
 
 // fetch data location from API
-export async function getStaticProps(formData) {
-  const provinceId = formData.provincies + ".json";
-  console.log("id", provinceId);
-  // fetch data provincies
+export async function getStaticProps(link) {
   const fetchProvinces = await fetch(
     "https://emsifa.github.io/api-wilayah-indonesia/api/provinces.json"
   );
   const provinces = await fetchProvinces.json();
-  // fetch data regencies
-  const fetchRegencies = await fetch(
-    `https://emsifa.github.io/api-wilayah-indonesia/api/regencies/${provinceId}`
-  );
+
+  const fetchRegencies = await fetch(`${link}`);
   const regencies = await fetchRegencies.json();
+
   return {
     props: {
       provinces,
