@@ -37,13 +37,3 @@ const FormulirKlaim = ({ formData, setFormData, provinces }) => {
   );
 };
 export default FormulirKlaim;
-
-export async function getStaticProps() {
-  const res = await fetch("https://jsonplaceholder.typicode.com/users");
-  const provinces = await res.json();
-  return {
-    props: {
-      provinces,
-    },
-  };
-}

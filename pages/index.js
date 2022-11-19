@@ -4,7 +4,10 @@ import FormulirKlaim from "../components/FormulirKlaim";
 import Navigasi from "../components/navigasi";
 import Review from "../components/Review";
 
-const Home = () => {
+const Home = (provinces) => {
+  // const { provinces } = props;
+  console.log("data", provinces);
+
   // set page
   const [page, setPage] = useState(0);
 
@@ -166,3 +169,15 @@ const Home = () => {
   );
 };
 export default Home;
+
+export async function getStaticProps() {
+  const res = await fetch(
+    "https://emsifa.github.io/api-wilayah-indonesia/api/provinces.json"
+  );
+  const provinces = await res.json();
+  return {
+    props: {
+      provinces,
+    },
+  };
+}
