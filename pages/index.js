@@ -18,6 +18,8 @@ const Home = (props) => {
     province: "",
   });
 
+  console.log(formData.province);
+
   // page title for indexing
   const FormTitles = ["Formulir Klaim", "Form Foto", "Review"];
 
@@ -176,14 +178,24 @@ const Home = (props) => {
 };
 export default Home;
 
-export async function getStaticProps() {
-  const res = await fetch(
+// fetch data location from API
+export async function getStaticProps(formData) {
+  const provinceId = formData.provincies + ".json";
+  console.log("id", provinceId);
+  // fetch data provincies
+  const fetchProvinces = await fetch(
     "https://emsifa.github.io/api-wilayah-indonesia/api/provinces.json"
   );
-  const provinces = await res.json();
+  const provinces = await fetchProvinces.json();
+  // fetch data regencies
+  const fetchRegencies = await fetch(
+    `https://emsifa.github.io/api-wilayah-indonesia/api/regencies/${provinceId}`
+  );
+  const regencies = await fetchRegencies.json();
   return {
     props: {
       provinces,
+      regencies,
     },
   };
 }
