@@ -200,7 +200,7 @@ export async function getStaticProps(link) {
   );
   const provinces = await fetchProvinces.json();
 
-  const fetchRegencies = await fetch(`${link}`);
+  const fetchRegencies = await fetch(link);
   const regencies = await fetchRegencies.json();
 
   return {
