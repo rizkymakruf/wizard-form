@@ -25,7 +25,13 @@ const Home = (props) => {
   // return form selected index
   const PageDisplay = () => {
     if (page === 0) {
-      return <FormulirKlaim formData={formData} setFormData={setFormData} />;
+      return (
+        <FormulirKlaim
+          formData={formData}
+          setFormData={setFormData}
+          provinces={provinces}
+        />
+      );
     } else if (page === 1) {
       return <FormFoto formData={formData} setFormData={setFormData} />;
     } else {
