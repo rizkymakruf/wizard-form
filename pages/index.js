@@ -5,9 +5,8 @@ import Navigasi from "../components/navigasi";
 import Review from "../components/Review";
 
 const Home = (props) => {
+  // fetch data provinces
   const { provinces } = props;
-  console.log("data", provinces);
-
   // set page
   const [page, setPage] = useState(0);
 
@@ -16,7 +15,7 @@ const Home = (props) => {
     firstName: "",
     lastName: "",
     biodata: "",
-    provinces: "",
+    province: "",
   });
 
   // page title for indexing
