@@ -1,4 +1,7 @@
-const FormulirKlaim = ({ formData, setFormData }) => {
+const FormulirKlaim = ({ formData, setFormData, provinces }) => {
+  //   const { provinces } = props;
+  console.log("provinces", provinces);
+
   return (
     <>
       <div className="w-full p-5 flex flex-col space-y-5">
@@ -29,7 +32,18 @@ const FormulirKlaim = ({ formData, setFormData }) => {
           }
         ></textarea>
       </div>
+      {/* <div>{provinces.map((provinces) => provinces.name)}</div> */}
     </>
   );
 };
 export default FormulirKlaim;
+
+export async function getStaticProps() {
+  const res = await fetch("https://jsonplaceholder.typicode.com/users");
+  const provinces = await res.json();
+  return {
+    props: {
+      provinces,
+    },
+  };
+}
