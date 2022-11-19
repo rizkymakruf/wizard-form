@@ -23,16 +23,28 @@ const Home = (props) => {
   });
 
   const [id, setId] = useState();
-  const [link, setLink] = useState("");
   const proId = formData.province;
   useEffect(() => {
     setId(`${proId === "" ? "11" : formData.province}`);
-    setLink(
-      `https://emsifa.github.io/api-wilayah-indonesia/api/regencies/${id}.json`
-    );
   }, [props]);
-  console.log("link", link);
+
   console.log("id", id);
+
+  const [data, setData] = useState(null);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const response = await fetch(
+        `https://emsifa.github.io/api-wilayah-indonesia/api/regencies/11.json`
+      );
+      const newData = await response.json();
+      setData(newData);
+    };
+
+    fetchData();
+  });
+
+  console.log("asu", data);
 
   // page title for indexing
   const FormTitles = ["Formulir Klaim", "Form Foto", "Review"];
@@ -200,13 +212,13 @@ export async function getStaticProps(link) {
   );
   const provinces = await fetchProvinces.json();
 
-  const fetchRegencies = await fetch(link);
-  const regencies = await fetchRegencies.json();
+  // const fetchRegencies = await fetch(`${link}`);
+  // const regencies = await fetchRegencies.json();
 
   return {
     props: {
       provinces,
-      regencies,
+      // regencies,
     },
   };
 }
