@@ -1,5 +1,4 @@
 const FormulirKlaim = ({ formData, setFormData, provinces }) => {
-  //   const { provinces } = props;
   console.log("provinces", provinces);
 
   return (
@@ -31,7 +30,12 @@ const FormulirKlaim = ({ formData, setFormData, provinces }) => {
             setFormData({ ...formData, biodata: event.target.value })
           }
         ></textarea>
-        <select>
+        <select
+          value={formData.province}
+          onChange={(event) =>
+            setFormData({ ...formData, province: event.target.value })
+          }
+        >
           <option>-- Select Province --</option>
           {provinces.map((x) => (
             <option value={x.id}>{x.name}</option>
