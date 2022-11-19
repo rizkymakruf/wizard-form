@@ -4,8 +4,8 @@ import FormulirKlaim from "../components/FormulirKlaim";
 import Navigasi from "../components/navigasi";
 import Review from "../components/Review";
 
-const Home = (provinces) => {
-  // const { provinces } = props;
+const Home = (props) => {
+  const { provinces } = props;
   console.log("data", provinces);
 
   // set page
@@ -16,6 +16,7 @@ const Home = (provinces) => {
     firstName: "",
     lastName: "",
     biodata: "",
+    provinces: "",
   });
 
   // page title for indexing

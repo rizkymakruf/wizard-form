@@ -1,5 +1,5 @@
-const FormulirKlaim = ({ formData, setFormData, provinces }) => {
-  //   const { provinces } = props;
+const FormulirKlaim = ({ formData, setFormData, props }) => {
+  const { provinces } = props;
   console.log("provinces", provinces);
 
   return (
