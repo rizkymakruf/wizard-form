@@ -1,9 +1,12 @@
-const FormulirKlaim = ({ formData, setFormData, provinci, regenci, kec }) => {
-  //   console.log("provinces", provinci);
-  //   console.log("regencies", regencies);
+const FormulirKlaim = ({
+  formData,
+  setFormData,
+  provinci,
+  regenci,
+  kec,
+  kel,
+}) => {
   const dataPro = provinci;
-  console.log("d", dataPro);
-  console.log("kk", regenci);
 
   return (
     <>
@@ -48,21 +51,26 @@ const FormulirKlaim = ({ formData, setFormData, provinci, regenci, kec }) => {
             </option>
           ))}
         </select>
-        <select
-          type={"text"}
-          className="p-2 text-sm bg-white bordered border-[2.5px] border-gray-300 focus:border-blue-800 rounded-md focus:outline-none"
-          value={formData.regencies}
-          onChange={(event) =>
-            setFormData({ ...formData, regencies: event.target.value })
-          }
-        >
-          <option value={""}>-- Select Kota --</option>
-          {regenci.map((x, index) => (
-            <option key={index} value={x.id}>
-              {x.nama}
-            </option>
-          ))}
-        </select>
+        {provinci === "" ? (
+          <div></div>
+        ) : (
+          <select
+            type={"text"}
+            className="p-2 text-sm bg-white bordered border-[2.5px] border-gray-300 focus:border-blue-800 rounded-md focus:outline-none"
+            value={formData.regencies}
+            onChange={(event) =>
+              setFormData({ ...formData, regencies: event.target.value })
+            }
+          >
+            <option value={""}>-- Select Kota --</option>
+            {regenci.map((x, index) => (
+              <option key={index} value={x.id}>
+                {x.nama}
+              </option>
+            ))}
+          </select>
+        )}
+
         <select
           type={"text"}
           className="p-2 text-sm bg-white bordered border-[2.5px] border-gray-300 focus:border-blue-800 rounded-md focus:outline-none"
@@ -73,6 +81,21 @@ const FormulirKlaim = ({ formData, setFormData, provinci, regenci, kec }) => {
         >
           <option value={""}>-- Select Kecamatan --</option>
           {kec.map((x, index) => (
+            <option key={index} value={x.id}>
+              {x.nama}
+            </option>
+          ))}
+        </select>
+        <select
+          type={"text"}
+          className="p-2 text-sm bg-white bordered border-[2.5px] border-gray-300 focus:border-blue-800 rounded-md focus:outline-none"
+          value={formData.kelurahan}
+          onChange={(event) =>
+            setFormData({ ...formData, kelurahan: event.target.value })
+          }
+        >
+          <option value={""}>-- Select Kelurahan --</option>
+          {kel.map((x, index) => (
             <option key={index} value={x.id}>
               {x.nama}
             </option>

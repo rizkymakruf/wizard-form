@@ -7,6 +7,7 @@ import Review from "../components/Review";
 const Home = (props) => {
   // set page
   const [page, setPage] = useState(0);
+
   // set data from form
   const [formData, setFormData] = useState({
     firstName: "",
@@ -15,13 +16,18 @@ const Home = (props) => {
     provinci: "",
     regencies: "",
     kecamatan: "",
+    kelurahan: "",
   });
+
   // setting data distric
   const [provinci, setProvinci] = useState([]);
   const [provinciId, setProvinciId] = useState("");
   const [regenci, setRegenci] = useState([]);
   const [regenciId, setRegenciId] = useState("");
   const [kec, setKec] = useState([]);
+  const [kecId, setKecId] = useState("");
+  const [kel, setKel] = useState([]);
+
   // fetch provincies
   useEffect(() => {
     const getProvinci = async () => {
@@ -33,11 +39,13 @@ const Home = (props) => {
     };
     getProvinci();
   }, []);
+
   // set id provicies
   const idPro = formData.provinci;
   useEffect(() => {
     setProvinciId(`${idPro}`);
   });
+
   // fetch city
   useEffect(() => {
     const getRegenci = async () => {
@@ -49,11 +57,13 @@ const Home = (props) => {
     };
     getRegenci();
   }, [provinciId]);
+
   // set id city
   const idCity = formData.regencies;
   useEffect(() => {
     setRegenciId(`${idCity}`);
   });
+
   // fetch kec
   useEffect(() => {
     const getKec = async () => {
@@ -65,7 +75,24 @@ const Home = (props) => {
     };
     getKec();
   }, [regenciId]);
-  // ============================================
+
+  // set id kec
+  const idKec = formData.kecamatan;
+  useEffect(() => {
+    setKecId(`${idKec}`);
+  });
+
+  // fetch kel
+  useEffect(() => {
+    const getKel = async () => {
+      const resKel = await fetch(
+        `https://ibnux.github.io/data-indonesia/kelurahan/${kecId}.json`
+      );
+      const listKel = await resKel.json();
+      setKel(await listKel);
+    };
+    getKel();
+  }, [kecId]);
 
   // page title for indexing
   const FormTitles = ["Formulir Klaim", "Form Foto", "Review"];
@@ -80,6 +107,7 @@ const Home = (props) => {
           provinci={provinci}
           regenci={regenci}
           kec={kec}
+          kel={kel}
         />
       );
     } else if (page === 1) {
