@@ -18,6 +18,8 @@ const Home = (props) => {
     kecamatan: "",
     kelurahan: "",
     fotoKTP: "",
+    fotoSelfie: "",
+    fotoBebas: "",
   });
 
   // setting data distric
@@ -119,7 +121,7 @@ const Home = (props) => {
   };
 
   return (
-    <div className="w-full md:flex md:justify-center md:items-center md:p-20">
+    <div className="w-full md:flex md:justify-center md:items-center md:p-5">
       <div className="w-full md:w-2/4 md:bordered md:border-2 md:rounded-lg md:bg-gray-100 md:drop-shadow-lg">
         <Navigasi />
         {/* Step wizard */}
@@ -252,7 +254,7 @@ const Home = (props) => {
               className="py-1 w-16 rounded-md flex justify-center bg-green-500 text-white"
               onClick={() => {
                 if (page === FormTitles.length - 1) {
-                  alert("FORM SUBMITTED");
+                  alert("SUBMI FROM SUCCESSULY");
                   console.log(formData);
                 } else {
                   setPage((currPage) => currPage + 1);
