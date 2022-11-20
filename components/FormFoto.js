@@ -6,10 +6,9 @@ const FormFoto = ({ formData, setFormData }) => {
   const [selectedFile, setSelectedFile] = useState();
   const [checkFile, setCheckFile] = useState(false);
 
-  //   useEffect(() => {
-  //     setFormData({ ...formData, foto: selectedFile[0] });
-  //     console.log("dat", formData.foto);
-  //   }, []);
+  useEffect(() => {
+    setCheckFile(true);
+  }, []);
 
   const imageHandler = (e) => {
     setSelectedFile(e.target.files[0]);
@@ -18,15 +17,17 @@ const FormFoto = ({ formData, setFormData }) => {
 
   const imagesubmission = () => {
     if (checkFile) {
-      alert("File Uploaded");
-      setFormData({ ...formData, foto: selectedFile });
-      console.log("dat", formData.foto);
+      //   alert("File Uploaded");
+      setFormData({ ...formData, fotoKTP: selectedFile });
+      console.log("dat", formData.fotoKTP);
       console.log(selectedFile);
       setCheckFile(true);
     } else {
       alert("select a file");
     }
   };
+
+  const dat = formData.fotoKTP;
 
   return (
     <>
@@ -41,14 +42,18 @@ const FormFoto = ({ formData, setFormData }) => {
           <div className="absolute w-full  z-10 flex justify-center items-center gap-2">
             <img
               className={`h-36 w-full rounded-md ${
-                checkFile ? "opacity-1" : "opacity-0"
+                dat === "" ? "opacity-0" : "opacity-1"
               }`}
-              src={formData.foto ? URL.createObjectURL(formData.foto) : null}
+              src={dat ? URL.createObjectURL(dat) : null}
             />
           </div>
         </div>
-        <span className="text-[10px] w-56 text-gray-500 truncate">
-          {checkFile ? selectedFile.name : "choose a file"}
+        <span
+          className={`text-[10px] w-56 ${
+            dat ? "text-green-500" : "text-gray-500"
+          } truncate`}
+        >
+          {dat ? dat.name : "choose a file"}
         </span>
         <button
           onClick={imagesubmission}
@@ -66,7 +71,7 @@ const FormFoto = ({ formData, setFormData }) => {
               clipRule="evenodd"
             />
           </svg>
-          Klik to Upload
+          Klik to Upload KTP
         </button>
       </div>
     </>
