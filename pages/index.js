@@ -5,8 +5,6 @@ import Navigasi from "../components/navigasi";
 import Review from "../components/Review";
 
 const Home = (props) => {
-  // fetch data provinces
-  // const { provinces, regencies } = props;
   // set page
   const [page, setPage] = useState(0);
   // set data from form
@@ -15,39 +13,39 @@ const Home = (props) => {
     lastName: "",
     biodata: "",
     provinci: "",
-    // regencies: "",
+    regencies: "",
   });
-
+  // setting data distric
   const [provinci, setProvinci] = useState([]);
   const [provinciId, setProvinciId] = useState("");
   const [regenci, setRegenci] = useState([]);
-
+  // fetch provincies
   useEffect(() => {
     const getProvinci = async () => {
       const resProvinci = await fetch(
-        "https://dev.farizdotid.com/api/daerahindonesia/provinsi"
+        "https://ibnux.github.io/data-indonesia/provinsi.json"
       );
       const listProvinci = await resProvinci.json();
       setProvinci(await listProvinci);
     };
     getProvinci();
   }, []);
-
-  const handleProvinci = (event) => {
-    const getProvinciId = provinci;
-    setProvinciId(getProvinciId);
-  };
-
+  // set id provicies
+  const nyah = formData.provinci;
+  useEffect(() => {
+    setProvinciId(`${nyah}`);
+  });
+  // fetch city
   useEffect(() => {
     const getRegenci = async () => {
       const resRegenci = await fetch(
-        `https://dev.farizdotid.com/api/daerahindonesia/kota?id_provinsi=${provinciId}`
+        `https://ibnux.github.io/data-indonesia/kabupaten/${provinciId}.json`
       );
       const listRegenci = await resRegenci.json();
       setRegenci(await listRegenci);
     };
     getRegenci();
-  }, []);
+  }, [provinciId]);
 
   // ============================================
 
@@ -62,7 +60,7 @@ const Home = (props) => {
           formData={formData}
           setFormData={setFormData}
           provinci={provinci}
-          // regencies={regencies}
+          regenci={regenci}
         />
       );
     } else if (page === 1) {
