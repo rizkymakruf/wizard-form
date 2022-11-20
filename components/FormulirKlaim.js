@@ -1,6 +1,9 @@
-const FormulirKlaim = ({ formData, setFormData, provinci }) => {
-  console.log("provinces", provinci);
+const FormulirKlaim = ({ formData, setFormData, provinci, regenci }) => {
+  //   console.log("provinces", provinci);
   //   console.log("regencies", regencies);
+  const dataPro = provinci;
+  console.log("d", dataPro);
+  console.log("kk", regenci);
 
   return (
     <>
@@ -39,7 +42,7 @@ const FormulirKlaim = ({ formData, setFormData, provinci }) => {
           }
         >
           <option value={""}>-- Select Province --</option>
-          {provinci.provinsi.map((x, index) => (
+          {dataPro.map((x, index) => (
             <option key={index} value={x.id}>
               {x.nama}
             </option>
@@ -54,9 +57,11 @@ const FormulirKlaim = ({ formData, setFormData, provinci }) => {
           }
         >
           <option value={""}>-- Select regencies --</option>
-          {/* {regencies.map((x) => (
-            <option value={x.id}>{x.name}</option>
-          ))} */}
+          {regenci.map((x, index) => (
+            <option key={index} value={x.id}>
+              {x.nama}
+            </option>
+          ))}
         </select>
       </div>
     </>
