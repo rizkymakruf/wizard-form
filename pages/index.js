@@ -17,6 +17,7 @@ const Home = (props) => {
     regencies: "",
     kecamatan: "",
     kelurahan: "",
+    foto: "",
   });
 
   // setting data distric
