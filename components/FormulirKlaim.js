@@ -1,4 +1,4 @@
-const FormulirKlaim = ({ formData, setFormData, provinci, regenci }) => {
+const FormulirKlaim = ({ formData, setFormData, provinci, regenci, kec }) => {
   //   console.log("provinces", provinci);
   //   console.log("regencies", regencies);
   const dataPro = provinci;
@@ -41,7 +41,7 @@ const FormulirKlaim = ({ formData, setFormData, provinci, regenci }) => {
             setFormData({ ...formData, provinci: event.target.value })
           }
         >
-          <option value={""}>-- Select Province --</option>
+          <option value={""}>-- Select Provinsi --</option>
           {dataPro.map((x, index) => (
             <option key={index} value={x.id}>
               {x.nama}
@@ -56,8 +56,23 @@ const FormulirKlaim = ({ formData, setFormData, provinci, regenci }) => {
             setFormData({ ...formData, regencies: event.target.value })
           }
         >
-          <option value={""}>-- Select regencies --</option>
+          <option value={""}>-- Select Kota --</option>
           {regenci.map((x, index) => (
+            <option key={index} value={x.id}>
+              {x.nama}
+            </option>
+          ))}
+        </select>
+        <select
+          type={"text"}
+          className="p-2 text-sm bg-white bordered border-[2.5px] border-gray-300 focus:border-blue-800 rounded-md focus:outline-none"
+          value={formData.kecamatan}
+          onChange={(event) =>
+            setFormData({ ...formData, kecamatan: event.target.value })
+          }
+        >
+          <option value={""}>-- Select Kecamatan --</option>
+          {kec.map((x, index) => (
             <option key={index} value={x.id}>
               {x.nama}
             </option>

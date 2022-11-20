@@ -14,11 +14,14 @@ const Home = (props) => {
     biodata: "",
     provinci: "",
     regencies: "",
+    kecamatan: "",
   });
   // setting data distric
   const [provinci, setProvinci] = useState([]);
   const [provinciId, setProvinciId] = useState("");
   const [regenci, setRegenci] = useState([]);
+  const [regenciId, setRegenciId] = useState("");
+  const [kec, setKec] = useState([]);
   // fetch provincies
   useEffect(() => {
     const getProvinci = async () => {
@@ -31,9 +34,9 @@ const Home = (props) => {
     getProvinci();
   }, []);
   // set id provicies
-  const nyah = formData.provinci;
+  const idPro = formData.provinci;
   useEffect(() => {
-    setProvinciId(`${nyah}`);
+    setProvinciId(`${idPro}`);
   });
   // fetch city
   useEffect(() => {
@@ -46,7 +49,22 @@ const Home = (props) => {
     };
     getRegenci();
   }, [provinciId]);
-
+  // set id city
+  const idCity = formData.regencies;
+  useEffect(() => {
+    setRegenciId(`${idCity}`);
+  });
+  // fetch kec
+  useEffect(() => {
+    const getKec = async () => {
+      const resCity = await fetch(
+        `https://ibnux.github.io/data-indonesia/kecamatan/${regenciId}.json`
+      );
+      const listKec = await resCity.json();
+      setKec(await listKec);
+    };
+    getKec();
+  }, [regenciId]);
   // ============================================
 
   // page title for indexing
@@ -61,6 +79,7 @@ const Home = (props) => {
           setFormData={setFormData}
           provinci={provinci}
           regenci={regenci}
+          kec={kec}
         />
       );
     } else if (page === 1) {
