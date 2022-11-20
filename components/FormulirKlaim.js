@@ -1,5 +1,5 @@
-const FormulirKlaim = ({ formData, setFormData, provinces }) => {
-  console.log("provinces", provinces);
+const FormulirKlaim = ({ formData, setFormData, provinci }) => {
+  console.log("provinces", provinci);
   //   console.log("regencies", regencies);
 
   return (
@@ -33,14 +33,16 @@ const FormulirKlaim = ({ formData, setFormData, provinces }) => {
         ></textarea>
         <select
           className="p-2 text-sm bg-white bordered border-[2.5px] border-gray-300 focus:border-blue-800 rounded-md focus:outline-none"
-          value={formData.province}
+          value={formData.provinci}
           onChange={(event) =>
-            setFormData({ ...formData, province: event.target.value })
+            setFormData({ ...formData, provinci: event.target.value })
           }
         >
           <option value={""}>-- Select Province --</option>
-          {provinces.map((x) => (
-            <option value={x.id}>{x.name}</option>
+          {provinci.provinsi.map((x, index) => (
+            <option key={index} value={x.id}>
+              {x.nama}
+            </option>
           ))}
         </select>
         <select

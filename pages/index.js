@@ -1,38 +1,55 @@
-import { parse } from "postcss";
 import { useEffect, useState } from "react";
-import { StyleRegistry } from "styled-jsx";
 import FormFoto from "../components/FormFoto";
 import FormulirKlaim from "../components/FormulirKlaim";
 import Navigasi from "../components/navigasi";
 import Review from "../components/Review";
-import axios from "axios";
 
 const Home = (props) => {
   // fetch data provinces
-  const { provinces, regencies } = props;
+  // const { provinces, regencies } = props;
   // set page
   const [page, setPage] = useState(0);
-
   // set data from form
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
     biodata: "",
-    province: "",
-    regencies: "",
+    provinci: "",
+    // regencies: "",
   });
 
-  const [id, setId] = useState();
-  const [link, setLink] = useState("");
-  const proId = formData.province;
+  const [provinci, setProvinci] = useState([]);
+  const [provinciId, setProvinciId] = useState("");
+  const [regenci, setRegenci] = useState([]);
+
   useEffect(() => {
-    setId(`${proId === "" ? "11" : formData.province}`);
-    setLink(
-      `https://emsifa.github.io/api-wilayah-indonesia/api/regencies/${id}.json`
-    );
-  }, [props]);
-  console.log("link", link);
-  console.log("id", id);
+    const getProvinci = async () => {
+      const resProvinci = await fetch(
+        "https://dev.farizdotid.com/api/daerahindonesia/provinsi"
+      );
+      const listProvinci = await resProvinci.json();
+      setProvinci(await listProvinci);
+    };
+    getProvinci();
+  }, []);
+
+  const handleProvinci = (event) => {
+    const getProvinciId = provinci;
+    setProvinciId(getProvinciId);
+  };
+
+  useEffect(() => {
+    const getRegenci = async () => {
+      const resRegenci = await fetch(
+        `https://dev.farizdotid.com/api/daerahindonesia/kota?id_provinsi=${provinciId}`
+      );
+      const listRegenci = await resRegenci.json();
+      setRegenci(await listRegenci);
+    };
+    getRegenci();
+  }, []);
+
+  // ============================================
 
   // page title for indexing
   const FormTitles = ["Formulir Klaim", "Form Foto", "Review"];
@@ -44,8 +61,8 @@ const Home = (props) => {
         <FormulirKlaim
           formData={formData}
           setFormData={setFormData}
-          provinces={provinces}
-          regencies={regencies}
+          provinci={provinci}
+          // regencies={regencies}
         />
       );
     } else if (page === 1) {
@@ -194,19 +211,19 @@ const Home = (props) => {
 export default Home;
 
 // fetch data location from API
-export async function getStaticProps(link) {
-  const fetchProvinces = await fetch(
-    "https://emsifa.github.io/api-wilayah-indonesia/api/provinces.json"
-  );
-  const provinces = await fetchProvinces.json();
+// export async function getStaticProps(link) {
+//   const fetchProvinces = await fetch(
+//     "https://emsifa.github.io/api-wilayah-indonesia/api/provinces.json"
+//   );
+//   const provinces = await fetchProvinces.json();
 
-  // const fetchRegencies = await fetch({ link });
-  // const regencies = await fetchRegencies.json();
+//   // const fetchRegencies = await fetch({ link });
+//   // const regencies = await fetchRegencies.json();
 
-  return {
-    props: {
-      provinces,
-      // regencies,
-    },
-  };
-}
+//   return {
+//     props: {
+//       provinces,
+//       // regencies,
+//     },
+//   };
+// }
