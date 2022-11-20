@@ -7,6 +7,7 @@ const Review = (formData) => {
           {JSON.stringify(formData, null, 2)}
         </pre>
       </div>
+      <p className="text-[8px] text-gray-500">*view more on console</p>
     </div>
   );
 };
