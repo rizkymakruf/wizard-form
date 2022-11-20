@@ -224,18 +224,31 @@ const Home = (props) => {
         {/* Form container */}
         <div className="form-container">
           <div className="body">{PageDisplay()}</div>
-          <div className="footer w-full justify-center p-5 flex gap-3">
+          <div className="footer w-full justify-between p-5 flex">
             <button
-              className="py-1 px-2 bg-green-500 text-white"
+              className="py-1 w-16 rounded-md flex justify-center bg-green-500 text-white"
               disabled={page == 0}
               onClick={() => {
                 setPage((currPage) => currPage - 1);
               }}
             >
-              Prev
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                strokeWidth="1.5"
+                stroke="currentColor"
+                className="w-6 h-6"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M11.25 9l-3 3m0 0l3 3m-3-3h7.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                />
+              </svg>
             </button>
             <button
-              className="py-1 px-2 bg-green-500 text-white"
+              className="py-1 w-16 rounded-md flex justify-center bg-green-500 text-white"
               onClick={() => {
                 if (page === FormTitles.length - 1) {
                   alert("FORM SUBMITTED");
@@ -245,7 +258,37 @@ const Home = (props) => {
                 }
               }}
             >
-              {page === FormTitles.length - 1 ? "Submit" : "Next"}
+              {page === FormTitles.length - 1 ? (
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  strokeWidth="1.5"
+                  stroke="currentColor"
+                  className="w-6 h-6"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                  />
+                </svg>
+              ) : (
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  strokeWidth="1.5"
+                  stroke="currentColor"
+                  className="w-6 h-6"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M12.75 15l3-3m0 0l-3-3m3 3h-7.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                  />
+                </svg>
+              )}
             </button>
           </div>
         </div>
@@ -254,21 +297,3 @@ const Home = (props) => {
   );
 };
 export default Home;
-
-// fetch data location from API
-// export async function getStaticProps(link) {
-//   const fetchProvinces = await fetch(
-//     "https://emsifa.github.io/api-wilayah-indonesia/api/provinces.json"
-//   );
-//   const provinces = await fetchProvinces.json();
-
-//   // const fetchRegencies = await fetch({ link });
-//   // const regencies = await fetchRegencies.json();
-
-//   return {
-//     props: {
-//       provinces,
-//       // regencies,
-//     },
-//   };
-// }
